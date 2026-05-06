@@ -1,4 +1,4 @@
-USE paladex;
+USE Paladex;
 
 
 DROP TABLE IF EXISTS Participantes;
@@ -40,7 +40,7 @@ CREATE TABLE Clase_campeon (
 );
 
 CREATE TABLE Campeon(
-    id_campeon INT PRIMARY KEY,
+    id_campeon INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
     titulo VARCHAR(100),
     salud INT DEFAULT 100,
@@ -65,15 +65,21 @@ CREATE TABLE Habilidades(
         REFERENCES  Campeon(id_campeon)
 );
 
-CREATE TABLE Cartas(
-    id_carta INT PRIMARY KEY,
-    nombre VARCHAR(50),
+CREATE TABLE Cartas (
+    id_carta INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(200),
-    categoria VARCHAR(50)
+    categoria VARCHAR(50),
+    id_campeon INT NOT NULL,
+    
+    CONSTRAINT fk_cartas_campeon 
+        FOREIGN KEY (id_campeon) 
+        REFERENCES Campeon(id_campeon) 
+        ON DELETE CASCADE
 );
 
 CREATE TABLE Mazos(
-    id_mazo INT PRIMARY KEY,
+    id_mazo INT AUTO_INCREMENT PRIMARY KEY,
     nombre_mazo VARCHAR(100),
     descripcion VARCHAR(200),
     estado VARCHAR(50),      
