@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaMazo</class>
+ <widget class="QMainWindow" name="VentanaMazo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Paladex - Crear Mazo</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Nombre del Mazo:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="txtNombreMazo"/>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Selecciona Campeón:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="cbCampeon"/>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Selecciona tus 5 Cartas y Niveles:</string>
+      </property>
+     </widget>
+    </item>
+    
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QComboBox" name="cbCarta1"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="spinNivel1">
+        <property name="minimum"><number>1</number></property>
+        <property name="maximum"><number>5</number></property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QComboBox" name="cbCarta2"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="spinNivel2">
+        <property name="minimum"><number>1</number></property>
+        <property name="maximum"><number>5</number></property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QComboBox" name="cbCarta3"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spinNivel3">
+        <property name="minimum"><number>1</number></property>
+        <property name="maximum"><number>5</number></property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QComboBox" name="cbCarta4"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="spinNivel4">
+        <property name="minimum"><number>1</number></property>
+        <property name="maximum"><number>5</number></property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QComboBox" name="cbCarta5"/>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="spinNivel5">
+        <property name="minimum"><number>1</number></property>
+        <property name="maximum"><number>5</number></property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnGuardarMazo">
+      <property name="text">
+       <string>Guardar Mazo Completo</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+</ui>
