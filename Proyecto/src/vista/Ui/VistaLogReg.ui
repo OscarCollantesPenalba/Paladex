@@ -60,7 +60,6 @@
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -88,7 +87,6 @@ border-radius: 5
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -117,7 +115,6 @@ border-radius: 5
        <property name="font">
         <font>
          <pointsize>13</pointsize>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -167,7 +164,6 @@ color: white
        <property name="font">
         <font>
          <pointsize>13</pointsize>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -179,28 +175,6 @@ color: white
        </property>
        <property name="text">
         <string>Registrase</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_47">
-       <property name="geometry">
-        <rect>
-         <x>520</x>
-         <y>100</y>
-         <width>401</width>
-         <height>361</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background: transparent;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../../imagenes/paladex_image.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
        </property>
       </widget>
       <widget class="QLabel" name="label_48">
@@ -260,10 +234,36 @@ border-bottom-color: rgb(255, 255, 255);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../../imagenes/vecteezy_user-icon-in-trendy-flat-style-isolated-on-grey-background_5005840-1-removebg-preview.png</pixmap>
+        <pixmap>../../../scr/imagenes/vecteezy_user-icon-in-trendy-flat-style-isolated-on-grey-background_5005840-1-removebg-preview.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnIrAMazos">
+       <property name="geometry">
+        <rect>
+         <x>680</x>
+         <y>550</y>
+         <width>88</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Mazos</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>630</x>
+         <y>280</y>
+         <width>211</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Imagen</string>
        </property>
       </widget>
       <zorder>label_46</zorder>
@@ -271,10 +271,11 @@ border-bottom-color: rgb(255, 255, 255);
       <zorder>Usuario</zorder>
       <zorder>Contrasena</zorder>
       <zorder>BotonInicioSesion</zorder>
-      <zorder>label_47</zorder>
       <zorder>label_48</zorder>
       <zorder>label_49</zorder>
       <zorder>label_50</zorder>
+      <zorder>btnIrAMazos</zorder>
+      <zorder>label</zorder>
      </widget>
     </widget>
     <widget class="QWidget" name="pageRegister">
@@ -302,7 +303,6 @@ border-bottom-color: rgb(255, 255, 255);
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -330,7 +330,6 @@ border-radius: 5
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -383,7 +382,6 @@ border-radius: 5
        <property name="font">
         <font>
          <pointsize>13</pointsize>
-         <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
@@ -413,7 +411,7 @@ color: white
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../../imagenes/paladex_image.png</pixmap>
+        <pixmap>../../../scr/imagenes/paladex_image.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -456,7 +454,7 @@ border-bottom-color: rgb(255, 255, 255);
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../../imagenes/vecteezy_user-icon-in-trendy-flat-style-isolated-on-grey-background_5005840-1-removebg-preview.png</pixmap>
+        <pixmap>../../../scr/imagenes/vecteezy_user-icon-in-trendy-flat-style-isolated-on-grey-background_5005840-1-removebg-preview.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -474,7 +472,6 @@ border-bottom-color: rgb(255, 255, 255);
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -502,7 +499,6 @@ border-radius: 5
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -531,7 +527,6 @@ border-radius: 5
        <property name="font">
         <font>
          <pointsize>11</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
