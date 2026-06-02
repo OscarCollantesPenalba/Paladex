@@ -67,3 +67,53 @@ class Logica:
         resultado = user_dao.chek_sign(usuarioVO)
 
         return resultado
+    
+    def obtener_torneos(self):
+        try:
+            cursor = self.conexion.cursor()
+            cursor.execute("SELECT id_torneo, nombre, ubicacion, descripcion, reglas FROM Torneos")
+            resultados = cursor.fetchall()
+            cursor.close()
+            return resultados
+        except Exception as e:
+            print(f"Error al obtener torneos: {e}")
+            return []
+
+    def inscribir_usuario_torneo(self, id_usuario, id_torneo, alias, equipo):
+        try:
+            cursor = self.conexion.cursor()
+            sql = """
+                INSERT INTO Participantes (id_usuario, id_torneo, alias, equipo, win, loss) 
+                VALUES (%s, %s, %s, %s, 0, 0)
+            """
+            cursor.execute(sql, (id_usuario, id_torneo, alias, equipo))
+            self.conexion.commit()
+            cursor.close()
+            return True
+        except Exception as e:
+            print(f"Error en la inscripción: {e}")
+            return False
+        
+    def obtener_datos_perfil(self, id_usuario):
+        try:
+            cursor = self.conexion.cursor()
+            sql = "SELECT nombre_usuario, puntos_experiencia FROM Usuario WHERE id_usuario = %s"
+            cursor.execute(sql, (id_usuario,))
+            resultado = cursor.fetchone()
+            cursor.close()
+            return resultado
+        except Exception as e:
+            print(f"Error al obtener perfil: {e}")
+            return None
+
+    def obtener_estadisticas_torneo(self, id_usuario):
+        try:
+            cursor = self.conexion.cursor()
+            sql = "SELECT SUM(win), SUM(loss) FROM Participantes WHERE id_usuario = %s"
+            cursor.execute(sql, (id_usuario,))
+            resultado = cursor.fetchone()
+            cursor.close()
+            return resultado
+        except Exception as e:
+            print(f"Error al obtener estadísticas: {e}")
+            return (0, 0)

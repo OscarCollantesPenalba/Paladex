@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VentanaTorneos</class>
+ <widget class="QMainWindow" name="VentanaTorneos">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>650</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Paladex - Gestión de Torneos</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayoutLista">
+      <item>
+       <widget class="QLabel" name="lblLista">
+        <property name="text">
+         <string>Torneos Disponibles:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="listTorneos"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupDetalles">
+      <property name="title">
+       <string>Detalles del Torneo</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayoutDetalles">
+       <item>
+        <widget class="QLabel" name="lblUbicacion">
+         <property name="text">
+          <string>Ubicación: -</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblDescripcion">
+         <property name="text">
+          <string>Descripción: -</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblReglas">
+         <property name="text">
+          <string>Reglas: -</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnInscribirse">
+         <property name="text">
+          <string>Inscribirse en este Torneo</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+</ui>
