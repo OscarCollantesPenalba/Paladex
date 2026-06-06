@@ -7,24 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>500</height>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Paladex - Mi Perfil</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
    <property name="styleSheet">
     <string notr="true">QWidget#centralwidget {
     background-color: #F4F7FA;
 }
-
 QLabel {
     color: #333333;
 }</string>
@@ -46,38 +39,14 @@ QLabel {
      <number>25</number>
     </property>
     <item>
-     <widget class="QLabel" name="lblTituloPerfil">
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-        <pointsize>18</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: #07484F; margin-bottom: 5px;</string>
-      </property>
-      <property name="text">
-       <string>👤  MI PERFIL DE JUGADOR  👤</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QLabel" name="lblUsuario">
       <property name="font">
        <font>
         <family>Segoe UI</family>
-        <pointsize>14</pointsize>
+        <pointsize>16</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: #0F8A9D; margin-top: 5px;</string>
       </property>
       <property name="text">
        <string>Usuario: -</string>
@@ -93,11 +62,7 @@ QLabel {
        <font>
         <family>Segoe UI</family>
         <pointsize>12</pointsize>
-        <weight>50</weight>
        </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: #555555;</string>
       </property>
       <property name="text">
        <string>Nivel: -</string>
@@ -115,9 +80,6 @@ QLabel {
         <pointsize>11</pointsize>
        </font>
       </property>
-      <property name="styleSheet">
-       <string notr="true">color: #718096;</string>
-      </property>
       <property name="text">
        <string>Puntos de Experiencia: -</string>
       </property>
@@ -127,68 +89,11 @@ QLabel {
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>25</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
      <widget class="QGroupBox" name="groupEstadisticas">
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-        <pointsize>11</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QGroupBox {
-    background-color: white;
-    border: 1px solid #E0E6ED;
-    border-radius: 15px;
-    margin-top: 20px;
-    padding-top: 20px;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top center;
-    padding: 5px 15px;
-    color: #07484F;
-    background-color: #EAF7FA;
-    border-radius: 8px;
-}</string>
-      </property>
       <property name="title">
        <string>Estadísticas de Torneo</string>
       </property>
       <layout class="QFormLayout" name="formLayout">
-       <property name="leftMargin">
-        <number>20</number>
-       </property>
-       <property name="topMargin">
-        <number>15</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>20</number>
-       </property>
-       <property name="horizontalSpacing">
-        <number>15</number>
-       </property>
-       <property name="verticalSpacing">
-        <number>12</number>
-       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="lblVictoriasEtiqueta">
          <property name="font">
@@ -260,9 +165,62 @@ QGroupBox::title {
       </layout>
      </widget>
     </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutAcciones">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="btnSumarVictoria">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #0F8A9D;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #17A6BC;
+}</string>
+        </property>
+        <property name="text">
+         <string>+ Registrar Victoria</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSumarDerrota">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #E53E3E;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #FC8181;
+}</string>
+        </property>
+        <property name="text">
+         <string>+ Registrar Derrota</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
  </widget>
- <resources/>
- <connections/>
 </ui>

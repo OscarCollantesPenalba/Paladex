@@ -279,36 +279,6 @@ color: #E2E8F0;</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnIrAMazos">
-       <property name="geometry">
-        <rect>
-         <x>810</x>
-         <y>570</y>
-         <width>100</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: rgba(255, 255, 255, 20);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 50);
-    border-radius: 6px;
-}
-QPushButton:hover {
-    background-color: rgba(255, 255, 255, 40);
-}</string>
-       </property>
-       <property name="text">
-        <string>⚙️ Mazos</string>
-       </property>
-      </widget>
       
       <widget class="QLabel" name="label">
        <property name="geometry">
