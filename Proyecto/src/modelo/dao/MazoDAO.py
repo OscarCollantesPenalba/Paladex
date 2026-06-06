@@ -47,3 +47,60 @@ class MazoDAO(Conexion):
             return []
         finally:
             self.closeConnection()
+
+    def obtener_mazos_por_usuario(self, id_usuario):
+        cursor = self.getCursor()
+        if not cursor:
+            return []
+        try:
+            sql = """
+                SELECT m.id_mazo, m.nombre_mazo, c.nombre 
+                FROM Mazos m 
+                JOIN Campeon c ON m.id_campeon = c.id_campeon 
+                WHERE m.id_usuario = ?
+            """
+            cursor.execute(sql, (id_usuario,))
+            rows = cursor.fetchall()
+            return rows
+        except Exception as e:
+            print(f"Error MazoDAO Obtener: {e}")
+            return []
+        finally:
+            self.closeConnection()
+
+    def obtener_detalles_cartas_mazo(self, id_mazo):
+        cursor = self.getCursor()
+        if not cursor:
+            return []
+        try:
+            sql = """
+                SELECT c.nombre, mc.nivel_carta 
+                FROM Mazo_Carta mc 
+                JOIN Cartas c ON mc.id_carta = c.id_carta 
+                WHERE mc.id_mazo = ?
+            """
+            cursor.execute(sql, (id_mazo,))
+            rows = cursor.fetchall()
+            return rows
+        except Exception as e:
+            print(f"Error MazoDAO Detalles: {e}")
+            return []
+        finally:
+            self.closeConnection()
+
+    def eliminar_mazo_por_id(self, id_mazo):
+        cursor = self.getCursor()
+        if not cursor:
+            return False
+        try:
+            cursor.execute("DELETE FROM Mazo_Carta WHERE id_mazo = ?", (id_mazo,))
+            cursor.execute("DELETE FROM Mazos WHERE id_mazo = ?", (id_mazo,))
+            self.conexion.commit()
+            return True
+        except Exception as e:
+            if self.conexion:
+                self.conexion.rollback()
+            print(f"Error MazoDAO Eliminar: {e}")
+            return False
+        finally:
+            self.closeConnection()

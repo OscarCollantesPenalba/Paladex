@@ -100,4 +100,35 @@ class UsersDaoJBDC (Conexion):
             if cursor:
                 cursor.close()
             self.closeConnection()
-        
+    
+    def obtener_perfil_por_id(self, id_usuario):
+        cursor = self.getCursor()
+        try:
+            cursor.execute("SELECT id_usuario, nombre_completo, nombre_usuario, correo, contrasena, puntos_experiencia, id_rol FROM Usuario WHERE id_usuario = ?", (id_usuario,))
+            row = cursor.fetchone()
+            if row:
+                return UsuarioVO(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+            return None
+        except Exception as e:
+            print(f"Error UsersDaoJBDC Perfil: {e}")
+            return None
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
+    def obtener_totales_participante(self, id_usuario):
+        cursor = self.getCursor()
+        try:
+            cursor.execute("SELECT SUM(win), SUM(loss) FROM Participantes WHERE id_usuario = ?", (id_usuario,))
+            row = cursor.fetchone()
+            if row:
+                return (row[0] if row[0] is not None else 0, row[1] if row[1] is not None else 0)
+            return (0, 0)
+        except Exception as e:
+            print(f"Error UsersDaoJBDC Stats: {e}")
+            return (0, 0)
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
