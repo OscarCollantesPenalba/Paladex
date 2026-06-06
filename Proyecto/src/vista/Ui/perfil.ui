@@ -3,102 +3,47 @@
  <class>VistaPerfil</class>
  <widget class="QMainWindow" name="VistaPerfil">
   <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>350</width>
-    <height>300</height>
-   </rect>
+   <rect><x>0</x><y>0</y><width>380</width><height>380</height></rect>
   </property>
-  <property name="windowTitle">
-   <string>Paladex - Mi Perfil</string>
-  </property>
+  <property name="windowTitle"><string>Paladex - Mi Perfil</string></property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="lblUsuario">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-        <weight>75</weight>
-       </font>
-      </property>
-      <property name="text">
-       <string>Usuario: -</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
+      <property name="font"><font><pointsize>14</pointsize><weight>75</weight></font></property>
+      <property name="text"><string>Usuario: -</string></property>
+      <property name="alignment"><set>Qt::AlignCenter</set></property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="lblNivel">
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Nivel: -</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
+      <property name="font"><font><pointsize>12</pointsize></font></property>
+      <property name="text"><string>Nivel: -</string></property>
+      <property name="alignment"><set>Qt::AlignCenter</set></property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="lblXP">
-      <property name="text">
-       <string>Puntos de Experiencia: -</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
+      <property name="text"><string>Puntos de Experiencia: -</string></property>
+      <property name="alignment"><set>Qt::AlignCenter</set></property>
      </widget>
-    </item>
-    <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </spacer>
     </item>
     <item>
      <widget class="QGroupBox" name="groupEstadisticas">
-      <property name="title">
-       <string>Estadísticas de Torneo</string>
-      </property>
+      <property name="title"><string>Estadísticas de Torneo</string></property>
       <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="lblVictoriasEtiqueta">
-         <property name="text">
-          <string>Total Victorias:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="lblVictorias">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="lblDerrotasEtiqueta">
-         <property name="text">
-          <string>Total Derrotas:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="lblDerrotas">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
+       <item row="0" column="0"><widget class="QLabel" name="lblVictoriasEtiqueta"><property name="text"><string>Total Victorias:</string></property></widget></item>
+       <item row="0" column="1"><widget class="QLabel" name="lblVictorias"><property name="text"><string>0</string></property></widget></item>
+       <item row="1" column="0"><widget class="QLabel" name="lblDerrotasEtiqueta"><property name="text"><string>Total Derrotas:</string></property></widget></item>
+       <item row="1" column="1"><widget class="QLabel" name="lblDerrotas"><property name="text"><string>0</string></property></widget></item>
       </layout>
      </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutAcciones">
+      <item><widget class="QPushButton" name="btnSumarVictoria"><property name="text"><string>+ Añadir Victoria</string></property></widget></item>
+      <item><widget class="QPushButton" name="btnSumarDerrota"><property name="text"><string>+ Registrar Derrota</string></property></widget></item>
+     </layout>
     </item>
    </layout>
   </widget>

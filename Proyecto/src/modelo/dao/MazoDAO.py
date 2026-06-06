@@ -104,3 +104,21 @@ class MazoDAO(Conexion):
             return False
         finally:
             self.closeConnection()
+
+    def obtener_todos_los_mazos(self):
+        cursor = self.getCursor()
+        if not cursor:
+            return []
+        try:
+            sql = """
+                SELECT m.id_mazo, m.nombre_mazo, u.nombre_usuario 
+                FROM Mazos m 
+                JOIN Usuario u ON m.id_usuario = u.id_usuario
+            """
+            cursor.execute(sql)
+            return cursor.fetchall()
+        except Exception as e:
+            print(f"Error MazoDAO Global: {e}")
+            return []
+        finally:
+            self.closeConnection()
