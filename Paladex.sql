@@ -131,7 +131,7 @@ CREATE TABLE secciones(
 );
 
 CREATE TABLE Torneos(
-    id_torneo INT PRIMARY KEY,
+    id_torneo INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100),
     ubicacion VARCHAR(150),
     descripcion VARCHAR(200),
