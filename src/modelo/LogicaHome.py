@@ -1,7 +1,10 @@
 from src.modelo.dao.CampeonDaoJBDC import CampeonDaoJBDC
 from src.modelo.dao.CartaDaoJBDC import CartaDaoJBDC
 from src.modelo.dao.MazoDaoJBDC import MazoDaoJBDC
+from src.modelo.dao.MazoDAO import MazoDAO
 from src.modelo.dao.TorneoDaoJBDC import TorneoDaoJBDC
+from src.modelo.dao.UsersDaoJBDC import UsersDaoJBDC
+from src.modelo.conexion.Conexion import Conexion
 
 
 class LogicaHome:
@@ -120,8 +123,7 @@ class LogicaHome:
                 "• Las eliminaciones otorgan créditos para comprar mejoras.\n\n"
                 "Consejos:\n"
                 "• Prioriza siempre el objetivo sobre las kills.\n"
-                "• Un buen soporte puede cambiar el resultado del partido.\n"
-                "• Coordina el uso de ultimates con tu equipo."
+                "• Un buen soporte puede cambiar el resultado del partido."
             ),
         },
         {
@@ -129,8 +131,7 @@ class LogicaHome:
             "subtitulo":   "5v5  |  Objetivo: escoltar o detener la carga",
             "descripcion": (
                 "Un equipo debe escoltar una carga hasta la meta mientras "
-                "el equipo contrario intenta detenerla antes de que se agote "
-                "el tiempo.\n\n"
+                "el equipo contrario intenta detenerla antes de que se agote el tiempo.\n\n"
                 "Reglas:\n"
                 "• La carga avanza mientras haya aliados cerca.\n"
                 "• El equipo defensor gana si detiene la carga antes de la meta.\n"
@@ -152,14 +153,13 @@ class LogicaHome:
                 "• Los puntos pueden ser capturados y reconquistados.\n\n"
                 "Consejos:\n"
                 "• Divide el equipo eficientemente entre los tres puntos.\n"
-                "• No abandones un punto capturado sin dejar a alguien.\n"
                 "• El punto central suele ser el más valioso y disputado."
             ),
         },
     ]
 
     # ------------------------------------------------------------------ #
-    # Búsqueda                                                             #
+    # Búsqueda (base de datos)                                             #
     # ------------------------------------------------------------------ #
 
     def buscar(self, termino, filtro):
@@ -201,12 +201,11 @@ class LogicaHome:
         return [("torneo", vo) for vo in resultados]
 
     # ------------------------------------------------------------------ #
-    # Detalle                                                              #
+    # Detalle búsqueda                                                     #
     # ------------------------------------------------------------------ #
 
     def obtener_campeon(self, id_campeon):
-        dao_campeon = CampeonDaoJBDC()
-        campeon = dao_campeon.select_by_id(id_campeon)
+        campeon = CampeonDaoJBDC().select_by_id(id_campeon)
         if campeon:
             campeon.cartas = CartaDaoJBDC().select_by_campeon(id_campeon)
         return campeon
@@ -227,7 +226,7 @@ class LogicaHome:
         return TorneoDaoJBDC().select_by_id(id_torneo)
 
     # ------------------------------------------------------------------ #
-    # Acceso a datos estáticos                                             #
+    # Datos estáticos                                                      #
     # ------------------------------------------------------------------ #
 
     def obtener_novedad(self, indice):
@@ -238,3 +237,78 @@ class LogicaHome:
 
     def obtener_modo(self, indice):
         return self.MODOS[indice] if 0 <= indice < len(self.MODOS) else None
+
+    # ------------------------------------------------------------------ #
+    # Perfil                                                               #
+    # ------------------------------------------------------------------ #
+
+    def obtener_perfil(self, id_usuario):
+        return UsersDaoJBDC().obtener_perfil_por_id(id_usuario)
+
+    def obtener_estadisticas(self, id_usuario):
+        return UsersDaoJBDC().obtener_totales_participante(id_usuario)
+
+    def registrar_resultado_combate(self, id_usuario, es_victoria):
+        try:
+            dao = UsersDaoJBDC()
+            usuario_vo = dao.obtener_perfil_por_id(id_usuario)
+            stats = dao.obtener_totales_participante(id_usuario)
+            if not usuario_vo:
+                return False
+            victorias, derrotas = stats[0], stats[1]
+            if es_victoria:
+                victorias += 1
+                usuario_vo.puntos_experiencia += 25
+            else:
+                derrotas += 1
+                usuario_vo.puntos_experiencia = max(0, usuario_vo.puntos_experiencia - 10)
+            if usuario_vo.id_rol == 3 and usuario_vo.puntos_experiencia >= 100:
+                usuario_vo.id_rol = 2
+            elif usuario_vo.id_rol == 2 and usuario_vo.puntos_experiencia < 100:
+                usuario_vo.id_rol = 3
+            return dao.actualizar_progreso_usuario(
+                id_usuario, victorias, derrotas,
+                usuario_vo.puntos_experiencia, usuario_vo.id_rol
+            )
+        except Exception as e:
+            print(f"Error registrar_resultado_combate: {e}")
+            return False
+
+    # ------------------------------------------------------------------ #
+    # Mazos                                                                #
+    # ------------------------------------------------------------------ #
+
+    def obtener_campeones(self):
+        conexion_obj = Conexion()
+        conexion = conexion_obj.createConnection()
+        cursor = conexion.cursor()
+        cursor.execute("SELECT id_campeon, nombre FROM Campeon")
+        resultados = cursor.fetchall()
+        cursor.close()
+        conexion.close()
+        return resultados
+
+    def obtener_cartas_por_campeon(self, id_campeon):
+        return MazoDAO().obtener_cartas_por_campeon(id_campeon)
+
+    def guardar_mazo(self, mazo_vo):
+        return MazoDAO().guardar_mazo_completo(mazo_vo)
+
+    def obtener_mazos_usuario(self, id_usuario):
+        return MazoDAO().obtener_mazos_por_usuario(id_usuario)
+
+    def obtener_detalles_mazo(self, id_mazo):
+        return MazoDAO().obtener_detalles_cartas_mazo(id_mazo)
+
+    def eliminar_mazo(self, id_mazo):
+        return MazoDAO().eliminar_mazo_por_id(id_mazo)
+
+    # ------------------------------------------------------------------ #
+    # Torneos                                                              #
+    # ------------------------------------------------------------------ #
+
+    def obtener_torneos(self):
+        return TorneoDaoJBDC().obtener_todos_los_torneos()
+
+    def inscribir_usuario_torneo(self, id_usuario, id_torneo, alias, equipo):
+        return TorneoDaoJBDC().inscribir_participante(id_usuario, id_torneo, alias, equipo)

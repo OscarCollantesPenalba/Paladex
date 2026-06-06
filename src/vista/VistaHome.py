@@ -26,23 +26,26 @@ class VistaHome(QMainWindow):
     # ------------------------------------------------------------------ #
 
     def _conectar_senales(self):
+        # Búsqueda
         if hasattr(self, "BtnBuscar"):
             self.BtnBuscar.clicked.connect(self._on_buscar)
         self.BarraBusqueda_2.returnPressed.connect(self._on_buscar)
         self.FiltrosBusqueda.currentTextChanged.connect(self._on_buscar)
         self.Resultados.currentRowChanged.connect(self._on_seleccionar)
 
+        # Novedades / Mapas / Modos
         self.BtnNovedad1.clicked.connect(lambda: self.__controlador.clic_novedad(0))
         self.BtnNovedad2.clicked.connect(lambda: self.__controlador.clic_novedad(1))
         self.BtnNovedad3.clicked.connect(lambda: self.__controlador.clic_novedad(2))
-
         self.BtnMapa1.clicked.connect(lambda: self.__controlador.clic_mapa(0))
         self.BtnMapa2.clicked.connect(lambda: self.__controlador.clic_mapa(1))
         self.BtnMapa3.clicked.connect(lambda: self.__controlador.clic_mapa(2))
-
         self.BtnModo1.clicked.connect(lambda: self.__controlador.clic_modo(0))
         self.BtnModo2.clicked.connect(lambda: self.__controlador.clic_modo(1))
         self.BtnModo3.clicked.connect(lambda: self.__controlador.clic_modo(2))
+
+        # Sidebar — se conectan desde ControladorPrincipal
+        # Los botones están disponibles como self.btnPerfil, self.btnMazos, etc.
 
     def _on_buscar(self):
         if self.__controlador:
@@ -60,7 +63,7 @@ class VistaHome(QMainWindow):
     # ------------------------------------------------------------------ #
 
     def cargarUsuario(self, usuario_vo):
-        self.LabelUsuario.setText(f"👤  {usuario_vo.nombre_usuario}")
+        self.LabelUsuario.setText(f"👤 {usuario_vo.nombre_usuario}")
 
     def mostrar_resultados(self, etiquetas):
         self.Resultados.clear()
@@ -74,17 +77,13 @@ class VistaHome(QMainWindow):
     def limpiar_resultados(self):
         self.Resultados.clear()
 
-    # ------------------------------------------------------------------ #
-    # Panel Info (GroupBox superior)                                       #
-    # ------------------------------------------------------------------ #
-
     def mostrar_info(self, datos):
         self.InfoTitulo.setText(datos.get("titulo", ""))
         self.InfoSubtitulo.setText(datos.get("subtitulo", ""))
         self.InfoDescripcion.setPlainText(datos.get("descripcion", ""))
 
     # ------------------------------------------------------------------ #
-    # Panel Detalle (lista derecha)                                        #
+    # Detalle — Campeón                                                    #
     # ------------------------------------------------------------------ #
 
     def limpiar_detalle(self):
@@ -169,10 +168,6 @@ class VistaHome(QMainWindow):
             lineas.append("\n── Reglas ──")
             lineas.append(vo.reglas)
         self.DetalleExtra.setPlainText("\n".join(lineas))
-
-    # ------------------------------------------------------------------ #
-    # Feedback                                                             #
-    # ------------------------------------------------------------------ #
 
     def mostrar_error(self, mensaje):
         QMessageBox.critical(self, "Error", mensaje)

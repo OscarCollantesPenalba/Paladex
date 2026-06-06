@@ -8,9 +8,10 @@ class MazoVO:
         self._id_usuario = id_usuario
         self._id_campeon = id_campeon
         self._es_oficial = es_oficial
-        self._nombre_campeon = nombre_campeon  # JOIN con campeon
-        self._nombre_usuario = nombre_usuario  # JOIN con usuario
-        self._cartas = []                      # Lista de CartaVO (se carga aparte)
+        self._nombre_campeon = nombre_campeon
+        self._nombre_usuario = nombre_usuario
+        self._cartas = []
+        self.lista_cartas = []  # Lista de (id_carta, nivel) para guardar en BD
 
     @property
     def id_mazo(self):
