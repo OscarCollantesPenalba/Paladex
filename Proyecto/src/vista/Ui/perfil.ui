@@ -3,49 +3,266 @@
  <class>VistaPerfil</class>
  <widget class="QMainWindow" name="VistaPerfil">
   <property name="geometry">
-   <rect><x>0</x><y>0</y><width>380</width><height>380</height></rect>
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>500</height>
+   </rect>
   </property>
-  <property name="windowTitle"><string>Paladex - Mi Perfil</string></property>
+  <property name="windowTitle">
+   <string>Paladex - Mi Perfil</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#centralwidget {
+    background-color: #F4F7FA;
+}
+
+QLabel {
+    color: #333333;
+}</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>12</number>
+    </property>
+    <property name="leftMargin">
+     <number>25</number>
+    </property>
+    <property name="topMargin">
+     <number>25</number>
+    </property>
+    <property name="rightMargin">
+     <number>25</number>
+    </property>
+    <property name="bottomMargin">
+     <number>25</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="lblTituloPerfil">
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>18</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #07484F; margin-bottom: 5px;</string>
+      </property>
+      <property name="text">
+       <string>👤  MI PERFIL DE JUGADOR  👤</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
     <item>
      <widget class="QLabel" name="lblUsuario">
-      <property name="font"><font><pointsize>14</pointsize><weight>75</weight></font></property>
-      <property name="text"><string>Usuario: -</string></property>
-      <property name="alignment"><set>Qt::AlignCenter</set></property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #0F8A9D; margin-top: 5px;</string>
+      </property>
+      <property name="text">
+       <string>Usuario: -</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="lblNivel">
-      <property name="font"><font><pointsize>12</pointsize></font></property>
-      <property name="text"><string>Nivel: -</string></property>
-      <property name="alignment"><set>Qt::AlignCenter</set></property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #555555;</string>
+      </property>
+      <property name="text">
+       <string>Nivel: -</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="lblXP">
-      <property name="text"><string>Puntos de Experiencia: -</string></property>
-      <property name="alignment"><set>Qt::AlignCenter</set></property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #718096;</string>
+      </property>
+      <property name="text">
+       <string>Puntos de Experiencia: -</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>25</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item>
      <widget class="QGroupBox" name="groupEstadisticas">
-      <property name="title"><string>Estadísticas de Torneo</string></property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    background-color: white;
+    border: 1px solid #E0E6ED;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 5px 15px;
+    color: #07484F;
+    background-color: #EAF7FA;
+    border-radius: 8px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Estadísticas de Torneo</string>
+      </property>
       <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0"><widget class="QLabel" name="lblVictoriasEtiqueta"><property name="text"><string>Total Victorias:</string></property></widget></item>
-       <item row="0" column="1"><widget class="QLabel" name="lblVictorias"><property name="text"><string>0</string></property></widget></item>
-       <item row="1" column="0"><widget class="QLabel" name="lblDerrotasEtiqueta"><property name="text"><string>Total Derrotas:</string></property></widget></item>
-       <item row="1" column="1"><widget class="QLabel" name="lblDerrotas"><property name="text"><string>0</string></property></widget></item>
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="topMargin">
+        <number>15</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <property name="bottomMargin">
+        <number>20</number>
+       </property>
+       <property name="horizontalSpacing">
+        <number>15</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>12</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblVictoriasEtiqueta">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #4A5568;</string>
+         </property>
+         <property name="text">
+          <string>Total Victorias:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="lblVictorias">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #0F8A9D;</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblDerrotasEtiqueta">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #4A5568;</string>
+         </property>
+         <property name="text">
+          <string>Total Derrotas:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="lblDerrotas">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #E53E3E;</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayoutAcciones">
-      <item><widget class="QPushButton" name="btnSumarVictoria"><property name="text"><string>+ Añadir Victoria</string></property></widget></item>
-      <item><widget class="QPushButton" name="btnSumarDerrota"><property name="text"><string>+ Registrar Derrota</string></property></widget></item>
-     </layout>
     </item>
    </layout>
   </widget>
  </widget>
+ <resources/>
+ <connections/>
 </ui>

@@ -6,46 +6,206 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>400</height>
+    <width>1000</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Paladex - Gestión de Torneos</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #F4F7FA;</string>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>20</number>
+    </property>
+    <property name="leftMargin">
+     <number>25</number>
+    </property>
+    <property name="topMargin">
+     <number>25</number>
+    </property>
+    <property name="rightMargin">
+     <number>25</number>
+    </property>
+    <property name="bottomMargin">
+     <number>25</number>
+    </property>
+    <property name="layoutStretch">
+     <string>1, 2</string>
+    </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayoutLista">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
-       <widget class="QLabel" name="lblLista">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>18</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #07484F;</string>
+        </property>
         <property name="text">
-         <string>Torneos Disponibles:</string>
+         <string>🏆  GESTIÓN DE TORNEOS  🏆</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listTorneos"/>
+       <widget class="QLabel" name="lblLista">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; margin-top: 5px;</string>
+        </property>
+        <property name="text">
+         <string>Torneos Disponibles:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="listTorneos">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QListWidget {
+    background-color: white;
+    border: 1px solid #E0E6ED;
+    border-radius: 12px;
+    padding: 8px;
+    outline: none;
+}
+
+QListWidget::item {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    color: #333333;
+}
+
+QListWidget::item:selected {
+    background-color: #0F8A9D;
+    color: white;
+    font-weight: bold;
+}
+
+QListWidget::item:hover:!selected {
+    background-color: #EAF7FA;
+    color: #0F8A9D;
+}</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
     <item>
      <widget class="QGroupBox" name="groupDetalles">
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox {
+    background-color: white;
+    border: 1px solid #E0E6ED;
+    border-radius: 15px;
+    margin-top: 25px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 5px 15px;
+    color: #07484F;
+    background-color: #EAF7FA;
+    border-radius: 8px;
+}</string>
+      </property>
       <property name="title">
        <string>Detalles del Torneo</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutDetalles">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       <property name="leftMargin">
+        <number>25</number>
+       </property>
+       <property name="topMargin">
+        <number>35</number>
+       </property>
+       <property name="rightMargin">
+        <number>25</number>
+       </property>
+       <property name="bottomMargin">
+        <number>25</number>
+       </property>
        <item>
         <widget class="QLabel" name="lblUbicacion">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #4A5568;</string>
+         </property>
          <property name="text">
-          <string>Ubicación: -</string>
+          <string>&lt;b&gt;Ubicación:&lt;/b&gt; Selecciona un torneo para ver los detalles.</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="lblDescripcion">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #4A5568;
+background-color: #F8FAFC;
+border-radius: 8px;
+padding: 10px;</string>
+         </property>
          <property name="text">
-          <string>Descripción: -</string>
+          <string>&lt;b&gt;Descripción:&lt;/b&gt; -</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -54,8 +214,20 @@
        </item>
        <item>
         <widget class="QLabel" name="lblReglas">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: #4A5568;
+background-color: #F8FAFC;
+border-radius: 8px;
+padding: 10px;</string>
+         </property>
          <property name="text">
-          <string>Reglas: -</string>
+          <string>&lt;b&gt;Reglas:&lt;/b&gt; -</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -67,10 +239,57 @@
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>180</height>
+          </size>
+         </property>
         </spacer>
        </item>
        <item>
         <widget class="QPushButton" name="btnInscribirse">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #0F8A9D;
+    color: white;
+    border: none;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #17A6BC;
+}
+
+QPushButton:pressed {
+    background-color: #0A6D7D;
+}
+
+QPushButton:disabled {
+    background-color: #E2E8F0;
+    color: #A0AEC0;
+}</string>
+         </property>
          <property name="text">
           <string>Inscribirse en este Torneo</string>
          </property>
@@ -82,4 +301,6 @@
    </layout>
   </widget>
  </widget>
+ <resources/>
+ <connections/>
 </ui>
