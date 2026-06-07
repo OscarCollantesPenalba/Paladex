@@ -8,9 +8,11 @@ from src.vista.VistaMenu import VistaMenu
 from src.vista.VistaTorneos import VistaTorneos
 from src.vista.VistaPerfil import VistaPerfil
 from src.vista.VistaMisMazos import VistaMisMazos
-from src.vista.VistaMenuModerador import VistaMenuModerador
-from src.vista.VistaMenuAdmin import VistaMenuAdmin
+from src.vista.VistaModerador import VistaModerador
+from src.vista.VistaAdmin import VistaAdmin
 from src.controlador.ControladorHome import ControladorHome
+from src.controlador.ControladorModerador import ControladorModerador
+from src.controlador.ControladorAdmin import ControladorAdmin
 
 
 class ControladorPrincipal:
@@ -98,10 +100,16 @@ class ControladorPrincipal:
         if hasattr(self.__vista_home, 'btnCerrarSesion'):
             self.__vista_home.btnCerrarSesion.clicked.connect(self.__cerrarSesionHome)
 
+        self.__vista_home.closeEvent = lambda event: self.__on_home_cerrada(event)
         self.__vista_home.show()
         self.__ctrl_home.inicializar()
 
+    def __on_home_cerrada(self, event):
+        self.__ctrl_home.cerrar_todo()
+        event.accept()
+
     def __cerrarSesionHome(self):
+        self.__ctrl_home.cerrar_todo()
         self.__vista_home.close()
         self.usuario_actual = None
         self.usuario_actual_id = None
@@ -325,151 +333,21 @@ class ControladorPrincipal:
     # ------------------------------------------------------------------ #
 
     def mostrar_menu_admin(self):
-        self.__admin = VistaMenuAdmin()
-        self.mostrar_admin_listas()
-
-        self.__admin.btnEliminarMod.clicked.connect(self.eliminar_moderador_admin)
-        self.__admin.btnEliminarCreador.clicked.connect(self.eliminar_creador_admin)
-        self.__admin.btnEliminarUserBase.clicked.connect(self.eliminar_usuario_admin)
-        self.__admin.btnRegistrarMod.clicked.connect(self.dar_alta_moderador)
-        self.__admin.btnCerrarSesionAdmin.clicked.connect(self.cerrar_sesion_admin)
-        self.__admin.show()
-
-    def mostrar_admin_listas(self):
-        self.__mods      = self.__modelo.obtener_usuarios_por_rol(2)
-        self.__creadores = self.__modelo.obtener_usuarios_por_rol(4)
-        self.__users     = self.__modelo.obtener_usuarios_por_rol(3)
-
-        self.__admin.listModeradores.clear()
-        for m in self.__mods:
-            self.__admin.listModeradores.addItem(f"{m.nombre_usuario} ({m.correo})")
-
-        self.__admin.listCreadoresMazos.clear()
-        for c in self.__creadores:
-            self.__admin.listCreadoresMazos.addItem(f"{c.nombre_usuario} ({c.correo})")
-
-        self.__admin.listUsuariosBase.clear()
-        for u in self.__users:
-            self.__admin.listUsuariosBase.addItem(f"{u.nombre_usuario} ({u.correo})")
-
-    def eliminar_moderador_admin(self):
-        fila = self.__admin.listModeradores.currentRow()
-        if fila >= 0:
-            self.__modelo.eliminar_usuario_db(self.__mods[fila].id_usuario)
-            self.mostrar_admin_listas()
-
-    def eliminar_creador_admin(self):
-        fila = self.__admin.listCreadoresMazos.currentRow()
-        if fila >= 0:
-            self.__modelo.eliminar_usuario_db(self.__creadores[fila].id_usuario)
-            self.mostrar_admin_listas()
-
-    def eliminar_usuario_admin(self):
-        fila = self.__admin.listUsuariosBase.currentRow()
-        if fila >= 0:
-            self.__modelo.eliminar_usuario_db(self.__users[fila].id_usuario)
-            self.mostrar_admin_listas()
-
-    def dar_alta_moderador(self):
-        nom  = self.__admin.txtAltaNombre.text().strip()
-        usr  = self.__admin.txtAltaUser.text().strip()
-        corr = self.__admin.txtAltaCorreo.text().strip()
-        pas  = self.__admin.txtAltaPass.text().strip()
-
-        if not (nom and usr and corr and pas):
-            return
-
-        nuevo_mod = UsuarioVO(None, nom, usr, corr, pas, 0, 2)
-        self.__modelo.Insert(nuevo_mod)
-        self.mostrar_admin_listas()
-
-        self.__admin.txtAltaNombre.clear()
-        self.__admin.txtAltaUser.clear()
-        self.__admin.txtAltaCorreo.clear()
-        self.__admin.txtAltaPass.clear()
-
-    def cerrar_sesion_admin(self):
-        self.__admin.close()
-        self.usuario_actual = None
-        self.usuario_actual_id = None
-        self.abrirIniciarSesion()
+        from src.vista.VistaAdmin import VistaAdmin
+        self.__vista_admin = VistaAdmin()
+        self.__ctrl_admin  = ControladorAdmin(self.__vista_admin, self.usuario_actual, self)
+        self.__vista_admin.controlador = self.__ctrl_admin
+        self.__vista_admin.show()
+        self.__ctrl_admin.inicializar()
 
     # ------------------------------------------------------------------ #
     # Panel Moderador                                                      #
     # ------------------------------------------------------------------ #
 
     def mostrar_menu_moderador(self):
-        self.__mod_view = VistaMenuModerador()
-        self.mostrar_moderador_datos()
-
-        self.__mod_view.listTorneosMod.currentRowChanged.connect(self.cargar_participantes_moderacion)
-        self.__mod_view.btnEliminarMazoGlobal.clicked.connect(self.eliminar_mazo_moderador)
-        self.__mod_view.btnEliminarTorneo.clicked.connect(self.eliminar_torneo_moderador)
-        self.__mod_view.btnEliminarParticipante.clicked.connect(self.expulsar_participante_moderador)
-        self.__mod_view.btnGuardarTorneo.clicked.connect(self.crear_torneo_moderador)
-        self.__mod_view.btnCerrarSesionMod.clicked.connect(self.cerrar_sesion_moderador)
-        self.__mod_view.show()
-
-    def mostrar_moderador_datos(self):
-        self.__mazos_globales  = self.__modelo.obtener_todos_los_mazos_global()
-        self.__torneos_globales = self.__modelo.obtener_torneos()
-
-        self.__mod_view.listMazosGlobal.clear()
-        for m in self.__mazos_globales:
-            self.__mod_view.listMazosGlobal.addItem(f"Mazo: {m[1]} | Creador: {m[2]}")
-
-        self.__mod_view.listTorneosMod.clear()
-        for t in self.__torneos_globales:
-            self.__mod_view.listTorneosMod.addItem(t.nombre if hasattr(t, 'nombre') else str(t[1]))
-
-    def cargar_participantes_moderacion(self, fila):
-        self.__mod_view.listParticipantes.clear()
-        if fila < 0:
-            return
-        id_torneo = self.__torneos_globales[fila].id_torneo
-        self.__participantes_actuales = self.__modelo.obtener_participantes_torneo(id_torneo)
-        for p in self.__participantes_actuales:
-            self.__mod_view.listParticipantes.addItem(f"User ID: {p[0]} - {p[1]} ({p[2]})")
-
-    def eliminar_mazo_moderador(self):
-        fila = self.__mod_view.listMazosGlobal.currentRow()
-        if fila >= 0:
-            self.__modelo.eliminar_mazo_db(self.__mazos_globales[fila][0])
-            self.mostrar_moderador_datos()
-
-    def eliminar_torneo_moderador(self):
-        fila = self.__mod_view.listTorneosMod.currentRow()
-        if fila >= 0:
-            self.__modelo.eliminar_torneo_db(self.__torneos_globales[fila].id_torneo)
-            self.mostrar_moderador_datos()
-            self.__mod_view.listParticipantes.clear()
-
-    def expulsar_participante_moderador(self):
-        fila_t = self.__mod_view.listTorneosMod.currentRow()
-        fila_p = self.__mod_view.listParticipantes.currentRow()
-        if fila_t >= 0 and fila_p >= 0:
-            id_torneo = self.__torneos_globales[fila_t].id_torneo
-            id_usuario = self.__participantes_actuales[fila_p][0]
-            self.__modelo.eliminar_participante_torneo(id_usuario, id_torneo)
-            self.cargar_participantes_moderacion(fila_t)
-
-    def crear_torneo_moderador(self):
-        nom  = self.__mod_view.txtNombreTorneo.text()
-        ub   = self.__mod_view.txtUbicacionTorneo.text()
-        desc = self.__mod_view.txtDescTorneo.text()
-        reg  = self.__mod_view.txtReglasTorneo.text()
-
-        if nom and ub:
-            nuevo_torneo = TorneoVO(None, nom, ub, desc, reg)
-            self.__modelo.añadir_torneo_db(nuevo_torneo)
-            self.mostrar_moderador_datos()
-            self.__mod_view.txtNombreTorneo.clear()
-            self.__mod_view.txtUbicacionTorneo.clear()
-            self.__mod_view.txtDescTorneo.clear()
-            self.__mod_view.txtReglasTorneo.clear()
-
-    def cerrar_sesion_moderador(self):
-        self.__mod_view.close()
-        self.usuario_actual = None
-        self.usuario_actual_id = None
-        self.abrirIniciarSesion()
+        from src.vista.VistaModerador import VistaModerador
+        self.__vista_mod = VistaModerador()
+        self.__ctrl_mod  = ControladorModerador(self.__vista_mod, self.usuario_actual, self)
+        self.__vista_mod.controlador = self.__ctrl_mod
+        self.__vista_mod.show()
+        self.__ctrl_mod.inicializar()

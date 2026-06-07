@@ -139,7 +139,24 @@ class UsersDaoJBDC(Conexion):
         if not cursor:
             return False
         try:
-            cursor.execute("DELETE FROM Usuario WHERE id_usuario = ?", (id_usuario,))
+            # Borrar cartas de los mazos del usuario
+            cursor.execute("""
+                DELETE FROM mazo_carta WHERE id_mazo IN (
+                    SELECT id_mazo FROM mazos WHERE id_usuario = ?
+                )
+            """, (id_usuario,))
+            # Borrar logs de moderación de sus mazos
+            cursor.execute("""
+                DELETE FROM modera_mazo WHERE id_mazo IN (
+                    SELECT id_mazo FROM mazos WHERE id_usuario = ?
+                )
+            """, (id_usuario,))
+            # Borrar participaciones en torneos
+            cursor.execute("DELETE FROM participantes WHERE id_usuario = ?", (id_usuario,))
+            # Borrar mazos
+            cursor.execute("DELETE FROM mazos WHERE id_usuario = ?", (id_usuario,))
+            # Borrar usuario
+            cursor.execute("DELETE FROM usuario WHERE id_usuario = ?", (id_usuario,))
             return True
         except Exception as e:
             print(f"Error UsersDaoJBDC Eliminar: {e}")
@@ -165,6 +182,24 @@ class UsersDaoJBDC(Conexion):
             return True
         except Exception as e:
             print(f"Error UsersDaoJBDC actualizar progreso: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+            self.closeConnection()
+
+    def cambiar_rol_usuario(self, id_usuario, nuevo_rol):
+        cursor = self.getCursor()
+        if not cursor:
+            return False
+        try:
+            cursor.execute(
+                "UPDATE Usuario SET id_rol = ? WHERE id_usuario = ?",
+                (nuevo_rol, id_usuario)
+            )
+            return True
+        except Exception as e:
+            print(f"Error UsersDaoJBDC cambiar rol: {e}")
             return False
         finally:
             if cursor:

@@ -3,152 +3,221 @@
  <class>MenuModerador</class>
  <widget class="QMainWindow" name="MenuModerador">
   <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>800</width>
-    <height>550</height>
-   </rect>
+   <rect><x>0</x><y>0</y><width>1100</width><height>700</height></rect>
   </property>
-  <property name="windowTitle">
-   <string>Paladex - Panel de Moderación</string>
-  </property>
+  <property name="windowTitle"><string>Paladex — Panel de Moderación</string></property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayoutPrincipal">
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <widget class="QWidget" name="tabMazos">
-       <attribute name="title">
-        <string>Auditoría de Mazos</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayoutMazos">
-        <item>
-         <widget class="QListWidget" name="listMazosGlobal"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnEliminarMazoGlobal">
-          <property name="text">
-           <string>Eliminar Mazo de Usuario</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect><x>0</x><y>0</y><width>1100</width><height>700</height></rect>
+    </property>
+
+    <!-- FONDO -->
+    <widget class="QLabel" name="Fondo">
+     <property name="geometry"><rect><x>0</x><y>0</y><width>1100</width><height>700</height></rect></property>
+     <property name="styleSheet"><string notr="true">background: qlineargradient(x1:0,y1:0,x2:1,y2:1,stop:0 #5EC9E0,stop:1 #07484F);</string></property>
+     <property name="text"><string/></property>
+    </widget>
+
+    <!-- TÍTULO -->
+    <widget class="QLabel" name="Titulo">
+     <property name="geometry"><rect><x>20</x><y>15</y><width>600</width><height>40</height></rect></property>
+     <property name="styleSheet"><string notr="true">color:white;font-size:22px;font-weight:bold;</string></property>
+     <property name="text"><string>⚔ PALADEX — Panel de Moderación</string></property>
+    </widget>
+
+    <!-- LABEL MODERADOR -->
+    <widget class="QLabel" name="lblModerador">
+     <property name="geometry"><rect><x>750</x><y>15</y><width>330</width><height>40</height></rect></property>
+     <property name="styleSheet"><string notr="true">color:#aaaaaa;font-size:13px;</string></property>
+     <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+     <property name="text"><string></string></property>
+    </widget>
+
+    <!-- TAB WIDGET -->
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="geometry"><rect><x>20</x><y>65</y><width>1060</width><height>580</height></rect></property>
+     <property name="styleSheet"><string notr="true">
+QTabWidget::pane {
+    border: 2px solid #3d5a80;
+    border-radius: 8px;
+    background-color: #2b2d42;
+}
+QTabBar::tab {
+    background-color: #1a3a4a;
+    color: #aaaaaa;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    border: 1px solid #3d5a80;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+QTabBar::tab:selected {
+    background-color: #3d5a80;
+    color: white;
+}
+QTabBar::tab:hover {
+    background-color: #0f3460;
+    color: white;
+}
+     </string></property>
+
+     <!-- ===== PESTAÑA MAZOS ===== -->
+     <widget class="QWidget" name="tabMazos">
+      <attribute name="title"><string>🃏  Auditoría de Mazos</string></attribute>
+
+      <widget class="QLabel" name="lblMazosInfo">
+       <property name="geometry"><rect><x>15</x><y>15</y><width>600</width><height>20</height></rect></property>
+       <property name="styleSheet"><string notr="true">color:#aaaaaa;font-size:11px;</string></property>
+       <property name="text"><string>Solo se muestran mazos no oficiales. Los mazos oficiales están protegidos.</string></property>
       </widget>
-      <widget class="QWidget" name="tabTorneos">
-       <attribute name="title">
-        <string>Gestión de Torneos</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayoutTorneos">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayoutTorneosLista">
-          <item>
-           <widget class="QLabel" name="lblTorneos">
-            <property name="text">
-             <string>Torneos:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listTorneosMod"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnEliminarTorneo">
-            <property name="text">
-             <string>Eliminar Torneo Seleccionado</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayoutParticipantes">
-          <item>
-           <widget class="QLabel" name="lblParticipantes">
-            <property name="text">
-             <string>Participantes Inscritos:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listParticipantes"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnEliminarParticipante">
-            <property name="text">
-             <string>Expulsar Participante</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupNuevoTorneo">
-          <property name="title">
-           <string>Añadir Nuevo Torneo</string>
-          </property>
-          <layout class="QFormLayout" name="formLayoutTorneo">
-           <item row="0" column="0">
-            <widget class="QLabel" name="lblNom">
-             <property name="text">
-              <string>Nombre:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="txtNombreTorneo"/>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="lblUb">
-             <property name="text">
-              <string>Ubicación:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="txtUbicacionTorneo"/>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="lblDesc">
-             <property name="text">
-              <string>Descripción:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QLineEdit" name="txtDescTorneo"/>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="lblReg">
-             <property name="text">
-              <string>Reglas:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QLineEdit" name="txtReglasTorneo"/>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="btnGuardarTorneo">
-             <property name="text">
-              <string>Crear Torneo</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
+
+      <widget class="QListWidget" name="listMazosGlobal">
+       <property name="geometry"><rect><x>15</x><y>45</y><width>1025</width><height>460</height></rect></property>
+       <property name="styleSheet"><string notr="true">
+QListWidget{background-color:#1e2235;color:white;border:2px solid #3d5a80;border-radius:8px;font-size:13px;}
+QListWidget::item{padding:10px;border-bottom:1px solid #3d5a80;}
+QListWidget::item:selected{background-color:#3d5a80;color:white;}
+QListWidget::item:hover{background-color:#0f3460;}
+       </string></property>
+      </widget>
+
+      <widget class="QPushButton" name="btnEliminarMazoGlobal">
+       <property name="geometry"><rect><x>15</x><y>515</y><width>200</width><height>36</height></rect></property>
+       <property name="styleSheet"><string notr="true">QPushButton{background-color:#7a1a1a;color:white;border:1px solid #e94560;border-radius:6px;font-size:13px;font-weight:bold;}QPushButton:hover{background-color:#e94560;}QPushButton:pressed{background-color:#c73652;}</string></property>
+       <property name="text"><string>🗑  Eliminar Mazo</string></property>
+       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
       </widget>
      </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnCerrarSesionMod">
-      <property name="text">
-       <string>Cerrar Sesión</string>
-      </property>
+
+     <!-- ===== PESTAÑA TORNEOS ===== -->
+     <widget class="QWidget" name="tabTorneos">
+      <attribute name="title"><string>🏆  Gestión de Torneos</string></attribute>
+
+      <!-- Lista torneos -->
+      <widget class="QLabel" name="lblTorneos">
+       <property name="geometry"><rect><x>15</x><y>15</y><width>300</width><height>20</height></rect></property>
+       <property name="styleSheet"><string notr="true">color:#5EC9E0;font-size:13px;font-weight:bold;</string></property>
+       <property name="text"><string>Torneos activos</string></property>
+      </widget>
+
+      <widget class="QListWidget" name="listTorneosMod">
+       <property name="geometry"><rect><x>15</x><y>40</y><width>300</width><height>350</height></rect></property>
+       <property name="styleSheet"><string notr="true">
+QListWidget{background-color:#1e2235;color:white;border:2px solid #3d5a80;border-radius:8px;font-size:13px;}
+QListWidget::item{padding:10px;border-bottom:1px solid #3d5a80;}
+QListWidget::item:selected{background-color:#3d5a80;color:white;}
+QListWidget::item:hover{background-color:#0f3460;}
+       </string></property>
+      </widget>
+
+      <widget class="QPushButton" name="btnEliminarTorneo">
+       <property name="geometry"><rect><x>15</x><y>400</y><width>300</width><height>36</height></rect></property>
+       <property name="styleSheet"><string notr="true">QPushButton{background-color:#7a1a1a;color:white;border:1px solid #e94560;border-radius:6px;font-size:13px;font-weight:bold;}QPushButton:hover{background-color:#e94560;}</string></property>
+       <property name="text"><string>🗑  Eliminar Torneo</string></property>
+       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+      </widget>
+
+      <!-- Lista participantes -->
+      <widget class="QLabel" name="lblParticipantes">
+       <property name="geometry"><rect><x>330</x><y>15</y><width>300</width><height>20</height></rect></property>
+       <property name="styleSheet"><string notr="true">color:#5EC9E0;font-size:13px;font-weight:bold;</string></property>
+       <property name="text"><string>Participantes inscritos</string></property>
+      </widget>
+
+      <widget class="QListWidget" name="listParticipantes">
+       <property name="geometry"><rect><x>330</x><y>40</y><width>300</width><height>350</height></rect></property>
+       <property name="styleSheet"><string notr="true">
+QListWidget{background-color:#1e2235;color:white;border:2px solid #3d5a80;border-radius:8px;font-size:13px;}
+QListWidget::item{padding:10px;border-bottom:1px solid #3d5a80;}
+QListWidget::item:selected{background-color:#3d5a80;color:white;}
+QListWidget::item:hover{background-color:#0f3460;}
+       </string></property>
+      </widget>
+
+      <widget class="QPushButton" name="btnEliminarParticipante">
+       <property name="geometry"><rect><x>330</x><y>400</y><width>300</width><height>36</height></rect></property>
+       <property name="styleSheet"><string notr="true">QPushButton{background-color:#7a1a1a;color:white;border:1px solid #e94560;border-radius:6px;font-size:13px;font-weight:bold;}QPushButton:hover{background-color:#e94560;}</string></property>
+       <property name="text"><string>⛔  Expulsar Participante</string></property>
+       <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+      </widget>
+
+      <!-- Formulario nuevo torneo -->
+      <widget class="QGroupBox" name="groupNuevoTorneo">
+       <property name="geometry"><rect><x>645</x><y>10</y><width>370</width><height>430</height></rect></property>
+       <property name="styleSheet"><string notr="true">
+QGroupBox{color:#5EC9E0;font-size:14px;font-weight:bold;border:2px solid #3d5a80;border-radius:8px;margin-top:10px;background-color:#1e2235;}
+QGroupBox::title{subcontrol-origin:margin;left:10px;padding:0 5px;}
+QLabel{color:#aaaaaa;font-size:12px;border:none;background:transparent;}
+QLineEdit{background-color:#2b2d42;color:white;border:1px solid #3d5a80;border-radius:6px;padding:6px;font-size:13px;}
+QLineEdit:focus{border:1px solid #5EC9E0;}
+       </string></property>
+       <property name="title"><string>Añadir Nuevo Torneo</string></property>
+
+       <widget class="QLabel" name="lblNom">
+        <property name="geometry"><rect><x>15</x><y>40</y><width>340</width><height>20</height></rect></property>
+        <property name="text"><string>Nombre:</string></property>
+       </widget>
+       <widget class="QLineEdit" name="txtNombreTorneo">
+        <property name="geometry"><rect><x>15</x><y>62</y><width>340</width><height>32</height></rect></property>
+        <property name="placeholderText"><string>Nombre del torneo</string></property>
+       </widget>
+
+       <widget class="QLabel" name="lblUb">
+        <property name="geometry"><rect><x>15</x><y>105</y><width>340</width><height>20</height></rect></property>
+        <property name="text"><string>Ubicación:</string></property>
+       </widget>
+       <widget class="QLineEdit" name="txtUbicacionTorneo">
+        <property name="geometry"><rect><x>15</x><y>127</y><width>340</width><height>32</height></rect></property>
+        <property name="placeholderText"><string>Ciudad o lugar</string></property>
+       </widget>
+
+       <widget class="QLabel" name="lblDesc">
+        <property name="geometry"><rect><x>15</x><y>170</y><width>340</width><height>20</height></rect></property>
+        <property name="text"><string>Descripción:</string></property>
+       </widget>
+       <widget class="QLineEdit" name="txtDescTorneo">
+        <property name="geometry"><rect><x>15</x><y>192</y><width>340</width><height>32</height></rect></property>
+        <property name="placeholderText"><string>Descripción breve</string></property>
+       </widget>
+
+       <widget class="QLabel" name="lblReg">
+        <property name="geometry"><rect><x>15</x><y>235</y><width>340</width><height>20</height></rect></property>
+        <property name="text"><string>Reglas:</string></property>
+       </widget>
+       <widget class="QLineEdit" name="txtReglasTorneo">
+        <property name="geometry"><rect><x>15</x><y>257</y><width>340</width><height>32</height></rect></property>
+        <property name="placeholderText"><string>Reglas del torneo</string></property>
+       </widget>
+
+       <widget class="QPushButton" name="btnGuardarTorneo">
+        <property name="geometry"><rect><x>15</x><y>320</y><width>340</width><height>40</height></rect></property>
+        <property name="styleSheet"><string notr="true">QPushButton{background-color:#3d5a80;color:white;border:none;border-radius:6px;font-size:13px;font-weight:bold;}QPushButton:hover{background-color:#2c4a70;}</string></property>
+        <property name="text"><string>✚  Crear Torneo</string></property>
+        <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+       </widget>
+      </widget>
+
      </widget>
-    </item>
-   </layout>
+    </widget>
+
+    <!-- BOTÓN CERRAR SESIÓN abajo a la derecha -->
+    <widget class="QPushButton" name="btnCerrarSesionMod">
+     <property name="geometry"><rect><x>920</x><y>655</y><width>160</width><height>36</height></rect></property>
+     <property name="styleSheet"><string notr="true">QPushButton{background-color:transparent;color:#aaaaaa;border:1px solid #3d5a80;border-radius:6px;font-size:12px;}QPushButton:hover{background-color:#7a1a1a;color:white;border:1px solid #e94560;}</string></property>
+     <property name="text"><string>Cerrar Sesión</string></property>
+     <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+    </widget>
+
+    <zorder>Fondo</zorder>
+    <zorder>Titulo</zorder>
+    <zorder>lblModerador</zorder>
+    <zorder>tabWidget</zorder>
+    <zorder>btnCerrarSesionMod</zorder>
+   </widget>
   </widget>
  </widget>
+ <resources/>
+ <connections/>
 </ui>

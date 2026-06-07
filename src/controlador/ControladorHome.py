@@ -15,6 +15,7 @@ class ControladorHome:
         self.__usuario = usuario_actual
         self.__logica  = LogicaHome()
         self.__resultados_actuales = []
+        self.__ventanas_hijas = []  # registro de ventanas secundarias abiertas
 
     # ------------------------------------------------------------------ #
     # Arranque                                                             #
@@ -94,6 +95,7 @@ class ControladorHome:
 
     def abrirPerfil(self):
         self.__vista_perfil = VistaPerfil()
+        self.__ventanas_hijas.append(self.__vista_perfil)
         self._actualizar_perfil()
         self.__vista_perfil.btnSumarVictoria.clicked.connect(lambda: self._procesar_combate(True))
         self.__vista_perfil.btnSumarDerrota.clicked.connect(lambda: self._procesar_combate(False))
@@ -139,6 +141,7 @@ class ControladorHome:
             return
 
         self.__vista_mazo = VistaMazo()
+        self.__ventanas_hijas.append(self.__vista_mazo)
         self._cargar_campeones_mazo()
         self.__vista_mazo.btnGuardarMazo.clicked.connect(self._guardar_mazo)
         self.__vista_mazo.cbCampeon.currentIndexChanged.connect(self._actualizar_cartas_mazo)
@@ -208,7 +211,8 @@ class ControladorHome:
             )
             return
 
-        mazo_vo = MazoVO(None, nombre, "Sin descripción", "Activo", self.__usuario.id_usuario, id_campeon, 0)
+        descripcion = self.__vista_mazo.txtDescripcion.toPlainText().strip() or "Sin descripción"
+        mazo_vo = MazoVO(None, nombre, descripcion, "activo", self.__usuario.id_usuario, id_campeon, 0)
         mazo_vo.lista_cartas = lista_cartas
         exito   = self.__logica.guardar_mazo(mazo_vo)
 
@@ -229,6 +233,7 @@ class ControladorHome:
             return
 
         self.__vista_mis_mazos = VistaMisMazos()
+        self.__ventanas_hijas.append(self.__vista_mis_mazos)
         self.__datos_mazos = self.__logica.obtener_mazos_usuario(self.__usuario.id_usuario)
 
         self.__vista_mis_mazos.listMazos.clear()
@@ -261,11 +266,26 @@ class ControladorHome:
             QMessageBox.critical(self.__vista_mis_mazos, "Error", "Error al eliminar el mazo.")
 
     # ------------------------------------------------------------------ #
+    # Cerrar ventanas hijas                                                #
+    # ------------------------------------------------------------------ #
+
+    def cerrar_todo(self):
+        """Cierra todas las ventanas secundarias abiertas."""
+        for ventana in self.__ventanas_hijas:
+            try:
+                if ventana.isVisible():
+                    ventana.close()
+            except Exception:
+                pass
+        self.__ventanas_hijas.clear()
+
+    # ------------------------------------------------------------------ #
     # Torneos                                                              #
     # ------------------------------------------------------------------ #
 
     def abrirTorneos(self):
         self.__vista_torneos = VistaTorneos()
+        self.__ventanas_hijas.append(self.__vista_torneos)
         self.__datos_torneos = self.__logica.obtener_torneos()
 
         self.__vista_torneos.listTorneos.clear()
@@ -289,11 +309,12 @@ class ControladorHome:
         if fila < 0:
             QMessageBox.warning(self.__vista_torneos, "Aviso", "Selecciona un torneo primero.")
             return
+        alias = self.__vista_torneos.txtAlias.text().strip() or self.__usuario.nombre_usuario
         exito = self.__logica.inscribir_usuario_torneo(
             self.__usuario.id_usuario,
             self.__datos_torneos[fila].id_torneo,
-            self.__usuario.nombre_usuario,
-            "Ninguno"
+            alias,
+            alias
         )
         if exito:
             QMessageBox.information(self.__vista_torneos, "Éxito", "¡Inscrito en el torneo!")

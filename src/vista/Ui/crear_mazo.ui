@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>650</height>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,6 +70,30 @@
      </layout>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutDescripcion">
+      <item>
+       <widget class="QLabel" name="lblDescripcion">
+        <property name="text">
+         <string>Descripción:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="txtDescripcion">
+        <property name="placeholderText">
+         <string>Describe la estrategia de tu mazo...</string>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>80</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayoutCampeon">
       <item>
        <widget class="QLabel" name="lblCampeon">
@@ -96,7 +120,7 @@
         <widget class="QComboBox" name="cbCarta1"/>
        </item>
        <item row="0" column="2">
-        <widget class="QSpinBox" name="spinNivel1"><property name="minimum"><number>1</number></property></widget>
+        <widget class="QSpinBox" name="spinNivel1"><property name="minimum"><number>1</number></property><property name="maximum"><number>5</number></property></widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="lblC2"><property name="text"><string>Carta 2:</string></property></widget>
@@ -105,7 +129,7 @@
         <widget class="QComboBox" name="cbCarta2"/>
        </item>
        <item row="1" column="2">
-        <widget class="QSpinBox" name="spinNivel2"><property name="minimum"><number>1</number></property></widget>
+        <widget class="QSpinBox" name="spinNivel2"><property name="minimum"><number>1</number></property><property name="maximum"><number>5</number></property></widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="lblC3"><property name="text"><string>Carta 3:</string></property></widget>
@@ -114,7 +138,7 @@
         <widget class="QComboBox" name="cbCarta3"/>
        </item>
        <item row="2" column="2">
-        <widget class="QSpinBox" name="spinNivel3"><property name="minimum"><number>1</number></property></widget>
+        <widget class="QSpinBox" name="spinNivel3"><property name="minimum"><number>1</number></property><property name="maximum"><number>5</number></property></widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="lblC4"><property name="text"><string>Carta 4:</string></property></widget>
@@ -123,7 +147,7 @@
         <widget class="QComboBox" name="cbCarta4"/>
        </item>
        <item row="3" column="2">
-        <widget class="QSpinBox" name="spinNivel4"><property name="minimum"><number>1</number></property></widget>
+        <widget class="QSpinBox" name="spinNivel4"><property name="minimum"><number>1</number></property><property name="maximum"><number>5</number></property></widget>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="lblC5"><property name="text"><string>Carta 5:</string></property></widget>
@@ -132,7 +156,7 @@
         <widget class="QComboBox" name="cbCarta5"/>
        </item>
        <item row="4" column="2">
-        <widget class="QSpinBox" name="spinNivel5"><property name="minimum"><number>1</number></property></widget>
+        <widget class="QSpinBox" name="spinNivel5"><property name="minimum"><number>1</number></property><property name="maximum"><number>5</number></property></widget>
        </item>
       </layout>
      </widget>

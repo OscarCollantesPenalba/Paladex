@@ -80,7 +80,21 @@ class VistaHome(QMainWindow):
     def mostrar_info(self, datos):
         self.InfoTitulo.setText(datos.get("titulo", ""))
         self.InfoSubtitulo.setText(datos.get("subtitulo", ""))
-        self.InfoDescripcion.setPlainText(datos.get("descripcion", ""))
+
+        descripcion = datos.get("descripcion", "")
+        url = datos.get("url", "")
+
+        if url:
+            html = (
+                f"<p style='color:white;font-size:12px;'>{descripcion}</p>"
+                f"<p style='margin-top:8px;'>"
+                f"<a href='{url}' style='color:#5EC9E0;'>🔗 Ver más</a>"
+                f"</p>"
+            )
+            self.InfoDescripcion.setOpenExternalLinks(True)
+            self.InfoDescripcion.setHtml(html)
+        else:
+            self.InfoDescripcion.setPlainText(descripcion)
 
     # ------------------------------------------------------------------ #
     # Detalle — Campeón                                                    #
