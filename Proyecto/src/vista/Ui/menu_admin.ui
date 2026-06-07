@@ -118,6 +118,14 @@ QTabBar::tab:hover{background-color:#0f3460;color:white;}
 
     </widget>
 
+    <!-- BOTÓN BACKUP -->
+    <widget class="QPushButton" name="btnBackup">
+     <property name="geometry"><rect><x>20</x><y>670</y><width>200</width><height>36</height></rect></property>
+     <property name="styleSheet"><string notr="true">QPushButton{background-color:#2a4a2a;color:white;border:1px solid #5EC9E0;border-radius:6px;font-size:12px;font-weight:bold;}QPushButton:hover{background-color:#3d5a80;}</string></property>
+     <property name="text"><string>💾  Hacer Backup</string></property>
+     <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+    </widget>
+
     <!-- BOTÓN CERRAR SESIÓN abajo derecha -->
     <widget class="QPushButton" name="btnCerrarSesionAdmin">
      <property name="geometry"><rect><x>920</x><y>670</y><width>160</width><height>36</height></rect></property>
@@ -130,6 +138,7 @@ QTabBar::tab:hover{background-color:#0f3460;color:white;}
     <zorder>Titulo</zorder>
     <zorder>lblAdmin</zorder>
     <zorder>tabWidget</zorder>
+    <zorder>btnBackup</zorder>
     <zorder>btnCerrarSesionAdmin</zorder>
    </widget>
   </widget>

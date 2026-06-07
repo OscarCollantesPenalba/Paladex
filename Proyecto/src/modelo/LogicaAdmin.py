@@ -1,6 +1,6 @@
 from src.modelo.dao.UsersDaoJBDC import UsersDaoJBDC
 from src.modelo.dao.ModeradoDaoJBDC import ModeraDAO
-from src.modelo.vo.UsuarioVo import UsuarioVO
+from src.modelo.dao.AdminDaoJBDC import AdminDaoJBDC
 
 
 class LogicaAdmin:
@@ -16,3 +16,6 @@ class LogicaAdmin:
 
     def obtener_logs_moderacion(self):
         return ModeraDAO().obtener_todos_los_logs()
+
+    def hacer_backup(self, ruta_destino):
+        return AdminDaoJBDC().hacer_backup(ruta_destino)

@@ -7,6 +7,9 @@ class LoginVO:
     def contrasena(self):
         return self._contrasena
 
+    @contrasena.setter
+    def contrasena(self, value):
+        self._contrasena = value
 
     @property
     def usuario(self):

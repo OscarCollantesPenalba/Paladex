@@ -1,5 +1,5 @@
 import os
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QFileDialog
 from PyQt5.uic import loadUi
 
 
@@ -28,13 +28,20 @@ class VistaAdmin(QMainWindow):
             lambda: self.__controlador.degradar_creador(self.listCreadoresMazos.currentRow()))
         self.btnAscenderModerador.clicked.connect(
             lambda: self.__controlador.ascender_a_moderador(self.listUsuariosBase.currentRow()))
+        self.btnBackup.clicked.connect(self._on_backup)
         self.btnCerrarSesionAdmin.clicked.connect(
             lambda: self.__controlador.cerrar_sesion())
-        self.tabWidget.currentChanged.connect(self._on_cambiar_tab)
 
-    def _on_cambiar_tab(self, indice):
-        if self.__controlador:
-            self.__controlador.cambiar_tab(indice)
+    def _on_backup(self):
+        """Abre un diálogo para elegir dónde guardar el backup."""
+        ruta, _ = QFileDialog.getSaveFileName(
+            self,
+            "Guardar backup de la base de datos",
+            "Paladex_backup.sql",
+            "Ficheros SQL (*.sql)"
+        )
+        if ruta and self.__controlador:
+            self.__controlador.hacer_backup(ruta)
 
     # ------------------------------------------------------------------ #
     # API pública                                                          #
