@@ -1,5 +1,5 @@
 class UsuarioVO:
-    def __init__(self, id_usuario, nombre_completo, nombre_usuario, correo, contrasena, puntos_experiencia=0, id_rol=3):
+    def __init__(self, id_usuario, nombre_completo, nombre_usuario, correo, contrasena, puntos_experiencia, id_rol):
         self.__id_usuario = id_usuario
         self.__nombre_completo = nombre_completo
         self.__nombre_usuario = nombre_usuario
@@ -9,19 +9,24 @@ class UsuarioVO:
         self.__id_rol = id_rol
 
     @property
-    def id_usuario(self): return self.__id_usuario
+    def id_usuario(self):
+        return self.__id_usuario
 
     @property
-    def nombre_completo(self): return self.__nombre_completo
+    def nombre_completo(self):
+        return self.__nombre_completo
 
     @property
-    def nombre_usuario(self): return self.__nombre_usuario
+    def nombre_usuario(self):
+        return self.__nombre_usuario
 
     @property
-    def correo(self): return self.__correo
+    def correo(self):
+        return self.__correo
 
     @property
-    def contrasena(self): return self.__contrasena
+    def contrasena(self):
+        return self.__contrasena
 
     @property
     def puntos_experiencia(self):

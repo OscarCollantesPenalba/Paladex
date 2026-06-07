@@ -23,8 +23,11 @@ class MiVentana(QMainWindow, Form):
 
     def go_register (self):
         self.QStackedWidget.setCurrentIndex(1)
-    
-    def back_login(self,event):
+
+    def volver_login(self):
+        self.QStackedWidget.setCurrentIndex(0)
+        
+    def back_login(self, event):
         self.QStackedWidget.setCurrentIndex(0)
 
     def log_in(self):
