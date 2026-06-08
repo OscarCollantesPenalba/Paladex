@@ -18,6 +18,7 @@ Aplicación de escritorio para la gestión de torneos, campeones, mazos y usuari
 
 ```
 Proyecto/
+├── main.py                        ← Punto de entrada
 ├── Paladex.sql                    ← Script de base de datos
 ├── lib/
 │   └── mysql-connector-j-9.7.0.jar
@@ -52,7 +53,6 @@ Proyecto/
 │   │       ├── TorneoVo.py
 │   │       └── HabilidadVo.py
 │   └── vista/
-│       ├── main.py                ← Punto de entrada
 │       ├── Login.py
 │       ├── VistaHome.py
 │       ├── VistaAdmin.py
@@ -116,14 +116,12 @@ def __init__(self, host='localhost', database='paladex', user='User', password='
 
 ## ▶️ Ejecución
 
-**Importante:** ejecutar siempre desde la carpeta `Proyecto/`
+> ⚠️ **El programa debe ejecutarse siempre desde la carpeta `Proyecto/`**, de lo contrario las rutas a los archivos `.ui` y al driver JDBC no se resolverán correctamente.
 
 ```bash
 cd Paladex/Proyecto
-python src/vista/main.py
+python main.py
 ```
-
-El punto de entrada es `src/vista/main.py`.
 
 ---
 

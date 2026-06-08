@@ -5,12 +5,10 @@ from PyQt5.uic import loadUi
 
 class VistaModerador(QMainWindow):
 
-    UI_PATH = os.path.join(os.path.dirname(__file__), "ui", "menu_moderador.ui")
-
     def __init__(self, parent=None):
         super().__init__(parent)
         self.__controlador = None
-        loadUi(self.UI_PATH, self)
+        loadUi('src/vista/Ui/menu_moderador.ui', self)
         self._conectar_senales()
 
     @property
