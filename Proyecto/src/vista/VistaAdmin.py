@@ -30,6 +30,10 @@ class VistaAdmin(QMainWindow):
         self.btnCerrarSesionAdmin.clicked.connect(
             lambda: self.__controlador.cerrar_sesion())
 
+        # Conexión de la señal del tabWidget para cargar los logs al cambiar de pestaña
+        self.tabWidget.currentChanged.connect(
+            lambda indice: self.__controlador.cambiar_tab(indice))
+
     def _on_backup(self):
         """Abre un diálogo para elegir dónde guardar el backup."""
         ruta, _ = QFileDialog.getSaveFileName(

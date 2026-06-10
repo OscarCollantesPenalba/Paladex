@@ -3,7 +3,8 @@ from PyQt5 import uic
 from src.modelo.Logica import Logica
 
 # Cargar la interfaz generada desde el archivo .ui
-Form, Window = uic.loadUiType("./src/vista/Ui/VistaLogReg.ui")
+import os
+Form, Window = uic.loadUiType(os.path.join(os.path.dirname(__file__), "Ui", "VistaLogReg.ui"))
 
 class MiVentana(QMainWindow, Form):
     def __init__(self):

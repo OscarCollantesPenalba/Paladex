@@ -37,7 +37,7 @@ class MazoDaoJBDC(Conexion):
     SQL_CARTAS_BY_MAZO = """
         SELECT ca.id_carta, ca.nombre, ca.descripcion, ca.categoria,
                ca.id_campeon, c.nombre, mc.nivel_carta
-        FROM mazo_cartas mc
+        FROM mazo_carta mc
         JOIN cartas ca ON mc.id_carta = ca.id_carta
         LEFT JOIN campeon c ON ca.id_campeon = c.id_campeon
         WHERE mc.id_mazo = ?

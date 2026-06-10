@@ -5,7 +5,9 @@ from src.modelo.Logica import Logica
 from src.vista.Login import MiVentana
 from src.controlador.ControladorPrincipal import ControladorPrincipal
 
-
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+os.chdir(BASE_DIR)
 
 
 

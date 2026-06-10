@@ -82,6 +82,8 @@ class VistaHome(QMainWindow):
         descripcion = datos.get("descripcion", "")
         url = datos.get("url", "")
 
+        self.InfoDescripcion.setOpenExternalLinks(True)
+
         if url:
             html = (
                 f"<p style='color:white;font-size:12px;'>{descripcion}</p>"
@@ -89,10 +91,10 @@ class VistaHome(QMainWindow):
                 f"<a href='{url}' style='color:#5EC9E0;'>🔗 Ver más</a>"
                 f"</p>"
             )
-            self.InfoDescripcion.setOpenExternalLinks(True)
-            self.InfoDescripcion.setHtml(html)
         else:
-            self.InfoDescripcion.setPlainText(descripcion)
+            html = f"<p style='color:white;font-size:12px;'>{descripcion}</p>"
+
+        self.InfoDescripcion.setHtml(html)
 
     # ------------------------------------------------------------------ #
     # Detalle — Campeón                                                    #

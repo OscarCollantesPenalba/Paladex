@@ -28,6 +28,10 @@ class UsuarioVO:
     def contrasena(self):
         return self.__contrasena
 
+    @contrasena.setter
+    def contrasena(self, valor):
+        self.__contrasena = valor
+
     @property
     def puntos_experiencia(self):
         return self.__puntos_experiencia
